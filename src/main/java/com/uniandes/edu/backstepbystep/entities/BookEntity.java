@@ -5,10 +5,87 @@
  */
 package com.uniandes.edu.backstepbystep.entities;
 
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
  *
  * @author Efrain Aperador
  */
-public class BookEntity {
+@Entity
+public class BookEntity implements Serializable{
+
+  @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  private Long id;
   
+  private String isbn;
+  @Temporal(TemporalType.DATE)
+  private Date publishDate;
+  private String description;
+  private String author;
+  private String editorial;
+  private String image;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getIsbn() {
+    return isbn;
+  }
+
+  public void setIsbn(String isbn) {
+    this.isbn = isbn;
+  }
+
+  public Date getPublishDate() {
+    return publishDate;
+  }
+
+  public void setPublishDate(Date publishDate) {
+    this.publishDate = publishDate;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getAuthor() {
+    return author;
+  }
+
+  public void setAuthor(String author) {
+    this.author = author;
+  }
+
+  public String getEditorial() {
+    return editorial;
+  }
+
+  public void setEditorial(String editorial) {
+    this.editorial = editorial;
+  }
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
 }
