@@ -7,6 +7,8 @@ package com.uniandes.edu.backstepbystep.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,21 +22,20 @@ import javax.persistence.TemporalType;
  * @author Efrain Aperador
  */
 @Entity
-public class BookEntity implements Serializable{
-
+public class AuthorEntity implements Serializable{
+  
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
-  private String isbn;
+  private String name;
   
   @Temporal(TemporalType.DATE)
-  private Date publishDate;
+  private Date birthDate;
   private String description;
-  
-  @OneToMany
-  private AuthorEntity author;
-  private String editorial;
   private String image;
+  
+  @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<BookEntity> books;
 
   public Long getId() {
     return id;
@@ -44,20 +45,20 @@ public class BookEntity implements Serializable{
     this.id = id;
   }
 
-  public String getIsbn() {
-    return isbn;
+  public String getName() {
+    return name;
   }
 
-  public void setIsbn(String isbn) {
-    this.isbn = isbn;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public Date getPublishDate() {
-    return publishDate;
+  public Date getBirthDate() {
+    return birthDate;
   }
 
-  public void setPublishDate(Date publishDate) {
-    this.publishDate = publishDate;
+  public void setBirthDate(Date birthDate) {
+    this.birthDate = birthDate;
   }
 
   public String getDescription() {
@@ -68,22 +69,6 @@ public class BookEntity implements Serializable{
     this.description = description;
   }
 
-  public AuthorEntity getAuthor() {
-    return author;
-  }
-
-  public void setAuthor(AuthorEntity author) {
-    this.author = author;
-  }
-
-  public String getEditorial() {
-    return editorial;
-  }
-
-  public void setEditorial(String editorial) {
-    this.editorial = editorial;
-  }
-
   public String getImage() {
     return image;
   }
@@ -91,4 +76,12 @@ public class BookEntity implements Serializable{
   public void setImage(String image) {
     this.image = image;
   }
+
+  public List<BookEntity> getBooks() {
+    return books;
+  }
+
+  public void setBooks(List<BookEntity> books) {
+    this.books = books;
+  } 
 }
