@@ -4,6 +4,7 @@ import com.uniandes.edu.backstepbystep.entities.BookEntity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,6 +16,7 @@ import java.util.List;
  *
  * @author Efrain Aperador
  */
+@XmlRootElement
 public class BookDTO {
   private Long id;
   private String isbn;

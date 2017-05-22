@@ -10,6 +10,7 @@ import com.uniandes.edu.backstepbystep.entities.BookEntity;
 import com.uniandes.edu.backstepbystep.front.dtos.BookDTO;
 import java.util.List;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,7 +19,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -29,8 +29,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 public class BookResource {
 
-  @Inject
-  private BookLogic bookLogic;
+  @Inject BookLogic bookLogic;
 
   @GET
   public List<BookDTO> getBookList() {
