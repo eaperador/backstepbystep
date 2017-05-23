@@ -16,14 +16,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Efrain Aperador
  */
-@XmlRootElement
 public class BookDTO {
   private Long id;
   private String isbn;
   private Date publishDate;
   private String description;
   private String editorial;
-  private String author;
+  private AuthorDTO author;
   private String image;
 
   public BookDTO() {
@@ -35,8 +34,26 @@ public class BookDTO {
     this.publishDate = bookE.getPublishDate();
     this.description = bookE.getDescription();
     this.editorial = bookE.getEditorial();
-    this.author = bookE.getAuthor();
+    this.author = new AuthorDTO(bookE.getAuthor());
     this.image = bookE.getImage();
+  }
+  
+  public static BookDTO toBookDTO(BookEntity bookE) {
+    BookDTO book = new BookDTO();
+    book.setId(bookE.getId());
+    book.setIsbn(bookE.getIsbn());
+    book.setPublishDate(bookE.getPublishDate());
+    book.setDescription(bookE.getDescription());
+    book.setEditorial(bookE.getEditorial());
+    book.setImage(bookE.getImage());
+    AuthorDTO author = new AuthorDTO();
+    author.setId(bookE.getId());
+    author.setName(bookE.getAuthor().getName());
+    author.setBirthDate(bookE.getAuthor().getBirthDate());
+    author.setDescription(bookE.getAuthor().getDescription());
+    author.setImage(bookE.getAuthor().getImage());
+    book.setAuthor(author);
+    return book;
   }
   
   public BookEntity toEntity(){
@@ -46,9 +63,18 @@ public class BookDTO {
     bookE.setPublishDate(this.publishDate);
     bookE.setDescription(this.description);
     bookE.setEditorial(this.editorial);
-    bookE.setAuthor(this.author);
+    bookE.setAuthor(AuthorDTO.toEntity(this.author));
     bookE.setImage(this.image);
     return bookE;
+  }
+  
+  public static List<BookEntity> toEntityList(List<BookDTO> lista){
+    List<BookEntity> entitiesList = new ArrayList<>();
+    for (BookDTO book : lista) {
+      BookEntity bookEntity = book.toEntity();
+      entitiesList.add(bookEntity);
+    }
+    return entitiesList;
   }
   
   public Long getId() {
@@ -91,11 +117,11 @@ public class BookDTO {
     this.editorial = editorial;
   }
 
-  public String getAuthor() {
+  public AuthorDTO getAuthor() {
     return author;
   }
 
-  public void setAuthor(String author) {
+  public void setAuthor(AuthorDTO author) {
     this.author = author;
   }
 
@@ -110,7 +136,7 @@ public class BookDTO {
   public static List<BookDTO> toBookList(List<BookEntity> entityList){
     List<BookDTO> listaBooks = new ArrayList<>();
     for(int i=0; i < entityList.size(); i++){
-      listaBooks.add(new BookDTO(entityList.get(i)));
+      listaBooks.add(toBookDTO(entityList.get(i)));
     }
     return listaBooks;
   }

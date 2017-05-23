@@ -26,7 +26,7 @@ public class AuthorPersistence {
   }
 
   public List<AuthorEntity> findAll() {
-    Query q = em.createQuery("select u from BookEntity u");
+    Query q = em.createQuery("select u from AuthorEntity u");
     return q.getResultList();
   }
 

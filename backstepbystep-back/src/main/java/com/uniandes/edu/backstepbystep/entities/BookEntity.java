@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,7 +32,7 @@ public class BookEntity implements Serializable{
   private Date publishDate;
   private String description;
   
-  @OneToMany
+  @ManyToOne
   private AuthorEntity author;
   private String editorial;
   private String image;
