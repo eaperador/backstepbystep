@@ -53,6 +53,15 @@ public class AuthorDetailDTO extends AuthorDTO{
     this.bookList = bookList;
   }
   
+  public static List<AuthorEntity> toEntityList(List<AuthorDTO> lista){
+    List<AuthorEntity> entitiesList = new ArrayList<>();
+    for (AuthorDTO author : lista) {
+      AuthorEntity authorEntity = author.toEntity();
+      entitiesList.add(authorEntity);
+    }
+    return entitiesList;
+  }
+  
   public static List<AuthorDetailDTO> toAuthorList(List<AuthorEntity> entities){
     List<AuthorDetailDTO> lista = new ArrayList<>();
     for(AuthorEntity author : entities){

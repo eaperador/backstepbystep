@@ -13,7 +13,6 @@ public class BookDTO {
   private Date publishDate;
   private String description;
   private String editorial;
-  private AuthorDTO author;
   private String image;
 
   public BookDTO() {
@@ -25,7 +24,6 @@ public class BookDTO {
     this.publishDate = bookE.getPublishDate();
     this.description = bookE.getDescription();
     this.editorial = bookE.getEditorial();
-    this.author = new AuthorDTO(bookE.getAuthor());
     this.image = bookE.getImage();
   }
   
@@ -39,11 +37,6 @@ public class BookDTO {
     book.setImage(bookE.getImage());
     AuthorDTO author = new AuthorDTO();
     author.setId(bookE.getId());
-    author.setName(bookE.getAuthor().getName());
-    author.setBirthDate(bookE.getAuthor().getBirthDate());
-    author.setDescription(bookE.getAuthor().getDescription());
-    author.setImage(bookE.getAuthor().getImage());
-    book.setAuthor(author);
     return book;
   }
   
@@ -54,7 +47,6 @@ public class BookDTO {
     bookE.setPublishDate(this.publishDate);
     bookE.setDescription(this.description);
     bookE.setEditorial(this.editorial);
-    bookE.setAuthor(this.getAuthor().toEntity());
     bookE.setImage(this.image);
     return bookE;
   }
@@ -97,14 +89,6 @@ public class BookDTO {
 
   public void setEditorial(String editorial) {
     this.editorial = editorial;
-  }
-
-  public AuthorDTO getAuthor() {
-    return author;
-  }
-
-  public void setAuthor(AuthorDTO author) {
-    this.author = author;
   }
 
   public String getImage() {

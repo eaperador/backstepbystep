@@ -5,6 +5,7 @@
  */
 package com.uniandes.edu.backstepbystep.front.dtos;
 
+import com.uniandes.edu.backstepbystep.entities.AuthorEntity;
 import com.uniandes.edu.backstepbystep.entities.BookEntity;
 import com.uniandes.edu.backstepbystep.entities.ReviewEntity;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 public class BookDetailDTO extends BookDTO{
   private List<ReviewDTO> reviewsList = new ArrayList<>();
+  private List<AuthorDTO> authorsList = new ArrayList<>();
 
   public BookDetailDTO() {
     super();
@@ -28,6 +30,11 @@ public class BookDetailDTO extends BookDTO{
       for(ReviewEntity review : entity.getReviews()){
         reviewsList.add(new ReviewDTO(review));
       }
+      
+      authorsList = new ArrayList<>();
+      for(AuthorEntity author : entity.getAuthors()){
+        authorsList.add(new AuthorDTO(author));
+      }
     }
   }
 
@@ -38,15 +45,23 @@ public class BookDetailDTO extends BookDTO{
   public void setReviewsList(List<ReviewDTO> reviewsList) {
     this.reviewsList = reviewsList;
   }
+
+  public List<AuthorDTO> getAuthorsList() {
+    return authorsList;
+  }
+
+  public void setAuthorsList(List<AuthorDTO> authorsList) {
+    this.authorsList = authorsList;
+  }
   
-  public BookEntity toEntity(BookDTO book){
+  public BookEntity toEntity(BookDetailDTO book){
     BookEntity bookE = new BookEntity();
     bookE.setId(book.getId());
     bookE.setIsbn(book.getIsbn());
     bookE.setPublishDate(book.getPublishDate());
     bookE.setDescription(book.getDescription());
     bookE.setEditorial(book.getEditorial());
-    bookE.setAuthor(book.getAuthor().toEntity());
+    bookE.setAuthors(AuthorDetailDTO.toEntityList(book.getAuthorsList()));
     bookE.setImage(book.getImage());
     bookE.setReviews(ReviewDTO.toEntityList(reviewsList));
     return bookE;

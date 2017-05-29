@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,8 +35,9 @@ public class BookEntity implements Serializable{
   private Date publishDate;
   private String description;
   
-  @ManyToOne
-  private AuthorEntity author;
+  @ManyToMany
+  @PodamExclude
+  private List<AuthorEntity> authors;
   
   @PodamExclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -76,12 +77,12 @@ public class BookEntity implements Serializable{
     this.description = description;
   }
 
-  public AuthorEntity getAuthor() {
-    return author;
+  public List<AuthorEntity> getAuthors() {
+    return authors;
   }
 
-  public void setAuthor(AuthorEntity author) {
-    this.author = author;
+  public void setAuthors(List<AuthorEntity> authors) {
+    this.authors = authors;
   }
 
   public String getEditorial() {
