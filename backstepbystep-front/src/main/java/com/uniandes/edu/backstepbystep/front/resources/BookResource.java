@@ -8,9 +8,9 @@ package com.uniandes.edu.backstepbystep.front.resources;
 import com.uniandes.edu.backstepbystep.ejb.BookLogic;
 import com.uniandes.edu.backstepbystep.entities.BookEntity;
 import com.uniandes.edu.backstepbystep.front.dtos.BookDTO;
+import com.uniandes.edu.backstepbystep.front.dtos.BookDetailDTO;
 import java.util.List;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,9 +32,9 @@ public class BookResource {
   @Inject BookLogic bookLogic;
 
   @GET
-  public List<BookDTO> getBookList() {
+  public List<BookDetailDTO> getBookList() {
     List<BookEntity> entities = bookLogic.getBooks();
-    return BookDTO.toBookList(entities);
+    return BookDetailDTO.toBookList(entities);
   }
   
   @GET

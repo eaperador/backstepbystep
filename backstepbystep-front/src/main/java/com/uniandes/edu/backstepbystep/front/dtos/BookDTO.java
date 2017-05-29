@@ -1,17 +1,7 @@
 package com.uniandes.edu.backstepbystep.front.dtos;
 
-import com.uniandes.edu.backstepbystep.entities.AuthorEntity;
 import com.uniandes.edu.backstepbystep.entities.BookEntity;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -69,15 +59,6 @@ public class BookDTO {
     return bookE;
   }
   
-  public static List<BookEntity> toEntityList(List<BookDTO> lista){
-    List<BookEntity> entitiesList = new ArrayList<>();
-    for (BookDTO book : lista) {
-      BookEntity bookEntity = book.toEntity();
-      entitiesList.add(bookEntity);
-    }
-    return entitiesList;
-  }
-  
   public Long getId() {
     return id;
   }
@@ -132,13 +113,5 @@ public class BookDTO {
 
   public void setImage(String image) {
     this.image = image;
-  }
-  
-  public static List<BookDTO> toBookList(List<BookEntity> entityList){
-    List<BookDTO> listaBooks = new ArrayList<>();
-    for(int i=0; i < entityList.size(); i++){
-      listaBooks.add(toBookDTO(entityList.get(i)));
-    }
-    return listaBooks;
   }
 }

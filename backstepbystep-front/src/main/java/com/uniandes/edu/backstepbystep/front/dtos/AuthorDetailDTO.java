@@ -40,7 +40,7 @@ public class AuthorDetailDTO extends AuthorDTO{
     author.setBirthDate(dto.getBirthDate());
     author.setDescription(dto.getDescription());
     author.setImage(dto.getImage());
-    author.setBooks(BookDTO.toEntityList(bookList));
+    author.setBooks(BookDetailDTO.toEntityList(bookList));
     
     return author;
   }
