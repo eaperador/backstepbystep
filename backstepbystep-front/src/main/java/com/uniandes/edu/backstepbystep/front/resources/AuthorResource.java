@@ -8,6 +8,7 @@ package com.uniandes.edu.backstepbystep.front.resources;
 import com.uniandes.edu.backstepbystep.ejb.AuthorLogic;
 import com.uniandes.edu.backstepbystep.entities.AuthorEntity;
 import com.uniandes.edu.backstepbystep.front.dtos.AuthorDTO;
+import com.uniandes.edu.backstepbystep.front.dtos.AuthorDetailDTO;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -30,9 +31,9 @@ public class AuthorResource {
   @Inject AuthorLogic authorLogic;
   
   @GET
-  public List<AuthorDTO> getAuthorsList() {
+  public List<AuthorDetailDTO> getAuthorsList() {
     List<AuthorEntity> entities = authorLogic.getAuthor();
-    return AuthorDTO.toAuthorList(entities);
+    return AuthorDetailDTO.toAuthorList(entities);
   }
   
   @GET
@@ -42,12 +43,12 @@ public class AuthorResource {
     if (entity == null) {
       throw new RuntimeException("El libro no existe");
     }
-    return new AuthorDTO(entity);
+    return new AuthorDetailDTO(entity);
   }
 
   @POST
   public AuthorDTO createAuthor(AuthorDTO author) {
-    return new AuthorDTO(authorLogic.createAuthor(AuthorDTO.toEntity(author)));
+    return new AuthorDTO(authorLogic.createAuthor(author.toEntity()));
   }
 
   @DELETE
@@ -67,6 +68,6 @@ public class AuthorResource {
     if (entity == null) {
       throw new RuntimeException("El autor no existe");
     }
-    return new AuthorDTO(authorLogic.updateAuthor(id, AuthorDTO.toEntity(author)));
+    return new AuthorDTO(authorLogic.updateAuthor(id, author.toEntity()));
   }
 }

@@ -1,5 +1,6 @@
 package com.uniandes.edu.backstepbystep.front.dtos;
 
+import com.uniandes.edu.backstepbystep.entities.AuthorEntity;
 import com.uniandes.edu.backstepbystep.entities.BookEntity;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +64,7 @@ public class BookDTO {
     bookE.setPublishDate(this.publishDate);
     bookE.setDescription(this.description);
     bookE.setEditorial(this.editorial);
-    bookE.setAuthor(AuthorDTO.toEntity(this.author));
+    bookE.setAuthor(this.getAuthor().toEntity());
     bookE.setImage(this.image);
     return bookE;
   }

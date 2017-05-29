@@ -22,7 +22,6 @@ public class AuthorDTO {
   private Date birthDate;
   private String description;
   private String image;
-  private List<BookDTO> books;
 
   public AuthorDTO() {
   }
@@ -33,7 +32,6 @@ public class AuthorDTO {
     this.birthDate = entity.getBirthDate();
     this.description = entity.getDescription();
     this.image = entity.getImage();
-    this.books = BookDTO.toBookList(entity.getBooks());
   }
 
   public Long getId() {
@@ -75,32 +73,24 @@ public class AuthorDTO {
   public void setImage(String image) {
     this.image = image;
   }
-
-  public List<BookDTO> getBooks() {
-    return books;
-  }
-
-  public void setBooks(List<BookDTO> books) {
-    this.books = books;
-  }
   
-  public static AuthorEntity toEntity(AuthorDTO dto){
+  public AuthorEntity toEntity(AuthorDTO dto){
     AuthorEntity author = new AuthorEntity();
     author.setId(dto.getId());
     author.setName(dto.getName());
     author.setBirthDate(dto.getBirthDate());
     author.setDescription(dto.getDescription());
     author.setImage(dto.getImage());
-    author.setBooks(BookDTO.toEntityList(dto.getBooks()));
-    
     return author;
   }
   
-  public static List<AuthorDTO> toAuthorList(List<AuthorEntity> entities){
-    List<AuthorDTO> lista = new ArrayList<>();
-    for(AuthorEntity author : entities){
-      lista.add(new AuthorDTO(author));
-    }
-    return lista;
+  public AuthorEntity toEntity(){
+    AuthorEntity author = new AuthorEntity();
+    author.setId(this.getId());
+    author.setName(this.getName());
+    author.setBirthDate(this.getBirthDate());
+    author.setDescription(this.getDescription());
+    author.setImage(this.getImage());
+    return author;
   }
 }
