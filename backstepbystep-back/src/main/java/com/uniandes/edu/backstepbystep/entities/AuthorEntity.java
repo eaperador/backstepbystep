@@ -8,13 +8,15 @@ package com.uniandes.edu.backstepbystep.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -33,7 +35,8 @@ public class AuthorEntity implements Serializable{
   private String description;
   private String image;
   
-  @ManyToMany(mappedBy = "authors")
+  @PodamExclude
+  @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<BookEntity> books;
 
   public Long getId() {
